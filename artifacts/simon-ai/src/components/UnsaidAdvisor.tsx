@@ -13,43 +13,41 @@ const aiResponses = [
 export default function UnsaidAdvisor() {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState("Break into 5-minute steps. Then breathe. Do one now.");
-  const [history, setHistory] = useState<{ q: string }[]>([]);
+  const [history, setHistory] = useState<string[]>([]);
 
   const handleSend = () => {
     if (!input.trim()) return;
-    const randomResponse = aiResponses[Math.floor(Math.random() * aiResponses.length)];
-    setHistory((prev) => [...prev, { q: input }]);
-    setResponse(randomResponse);
+    const r = aiResponses[Math.floor(Math.random() * aiResponses.length)];
+    setHistory((prev) => [...prev, input]);
+    setResponse(r);
     setInput("");
   };
 
   return (
-    <div className="bg-white border border-[#E2DDEF] rounded-xl p-4 relative shadow-sm">
-      <h3 className="text-[#2D1F60] font-semibold text-sm mb-3">The Unsaid Advisor</h3>
+    <div className="rounded-xl p-4 relative" style={{ background: "#1A1820", border: "1px solid #2D2A3D" }}>
+      <h3 className="font-semibold text-white" style={{ fontSize: "13px", marginBottom: "10px" }}>The Unsaid Advisor</h3>
 
-      <div className="max-h-[60px] overflow-y-auto mb-2 flex flex-col gap-1">
-        {history.slice(-2).map((h, i) => (
-          <div key={i} className="text-xs text-[#9B8FC0] italic">"{h.q}"</div>
-        ))}
-      </div>
+      {history.slice(-1).map((h, i) => (
+        <div key={i} style={{ color: "#7B6FA0", fontSize: "10px", fontStyle: "italic", marginBottom: "6px" }}>"{h}"</div>
+      ))}
 
-      <div className="bg-[#F8F6FF] border border-[#E2DDEF] rounded-lg p-2.5 mb-3">
+      <div className="rounded-lg p-2.5 mb-3" style={{ background: "#12101A", border: "1px solid #2D2A3D" }}>
         <textarea value={input} onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), handleSend())}
           placeholder="*Job ki tension kaise kam karun?*"
-          className="w-full bg-transparent text-xs text-[#5A4A8A] placeholder-[#B0A4D0] italic outline-none resize-none h-10" />
+          className="w-full bg-transparent outline-none resize-none"
+          style={{ fontSize: "11px", color: "#9B8FC0", fontStyle: "italic", height: "36px" }} />
       </div>
 
-      <div className="bg-[#F0EBF8] border border-[#D8C8F0] rounded-lg p-3 text-xs text-[#4A3080] leading-relaxed">
-        {response}
+      <div className="rounded-lg p-3" style={{ background: "#12101A", border: "1px solid #2D2A3D" }}>
+        <p style={{ fontSize: "11px", color: "#ccc", lineHeight: "1.6" }}>{response}</p>
       </div>
 
-      <div className="absolute bottom-3 right-3">
-        <button onClick={handleSend}
-          className="p-1.5 rounded-full bg-[#4A3080] hover:bg-[#5A3890] transition-colors">
-          <Sparkles size={12} className="text-white" />
-        </button>
-      </div>
+      <button onClick={handleSend}
+        className="absolute bottom-3 right-3 rounded-full flex items-center justify-center transition-colors"
+        style={{ background: "#4A3080", width: "24px", height: "24px" }}>
+        <Sparkles size={12} style={{ color: "#fff" }} />
+      </button>
     </div>
   );
 }

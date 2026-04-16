@@ -1,31 +1,29 @@
 import { ClipboardList } from "lucide-react";
 
 const metrics = [
-  { label: "Mood", value: "Good", emoji: "😌", color: "bg-green-100 text-green-700 border-green-200" },
-  { label: "Stress", value: "Moderate", emoji: "🔥", color: "bg-orange-100 text-orange-700 border-orange-200" },
-  { label: "Progress", value: "72% ↑", emoji: "📈", color: "bg-green-100 text-green-700 border-green-200" },
+  { label: "Mood", value: "Good", emoji: "😌", valueStyle: { background: "#1A3A2A", color: "#4ADE80", border: "1px solid #2A4A3A", fontSize: "10px", padding: "2px 8px", borderRadius: "6px" } },
+  { label: "Stress", value: "Moderate", emoji: "🔥", valueStyle: { background: "#3A2A1A", color: "#FB923C", border: "1px solid #4A3A2A", fontSize: "10px", padding: "2px 8px", borderRadius: "6px" } },
+  { label: "Progress", value: "72% ↑", emoji: "📈", valueStyle: { background: "#1A3A2A", color: "#4ADE80", border: "1px solid #2A4A3A", fontSize: "10px", padding: "2px 8px", borderRadius: "6px" } },
 ];
 
 export default function MirrorOfNow() {
   return (
-    <div className="bg-white border border-[#E2DDEF] rounded-xl p-4 shadow-sm">
+    <div className="rounded-xl p-4" style={{ background: "#1A1820", border: "1px solid #2D2A3D" }}>
       <div className="flex items-center gap-2 mb-2">
-        <ClipboardList size={14} className="text-[#7B5EA7]" />
-        <h3 className="text-[#2D1F60] font-semibold text-sm">Mirror of Now</h3>
+        <ClipboardList size={13} style={{ color: "#9B7EC8" }} />
+        <h3 className="font-semibold text-white" style={{ fontSize: "13px" }}>Mirror of Now</h3>
       </div>
-      <p className="text-[#8A7AB0] text-xs leading-relaxed mb-4">
+      <p style={{ color: "#7B6FA0", fontSize: "11px", lineHeight: "1.5", marginBottom: "12px" }}>
         You've faced conflict, but your focus is shifting. See your reflection.
       </p>
-      <div className="flex flex-col gap-2.5">
+      <div className="flex flex-col gap-3">
         {metrics.map((m) => (
           <div key={m.label} className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-base">{m.emoji}</span>
-              <span className="text-[#5A4A8A] text-xs">{m.label}</span>
+              <span style={{ fontSize: "14px" }}>{m.emoji}</span>
+              <span style={{ color: "#aaa", fontSize: "12px" }}>{m.label}</span>
             </div>
-            <span className={`text-xs px-2.5 py-1 rounded-md border font-medium ${m.color}`}>
-              {m.value}
-            </span>
+            <span style={m.valueStyle}>{m.value}</span>
           </div>
         ))}
       </div>
