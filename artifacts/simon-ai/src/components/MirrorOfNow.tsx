@@ -8,7 +8,7 @@ const metrics = [
 
 export default function MirrorOfNow() {
   return (
-    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px" }}>
+    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", height: "100%", boxSizing: "border-box" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 5 }}>
         <ClipboardList size={12} style={{ color: "#7B5EA7" }} />
         <span style={{ fontWeight: 600, color: "#2D1F60", fontSize: 12 }}>Mirror of Now</span>

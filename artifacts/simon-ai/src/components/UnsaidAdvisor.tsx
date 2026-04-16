@@ -20,7 +20,7 @@ export default function UnsaidAdvisor() {
   };
 
   return (
-    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", position: "relative" }}>
+    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", position: "relative", height: "100%", boxSizing: "border-box" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
         <img src={`${import.meta.env.BASE_URL}candle-real.png`} alt="candle"
           style={{ width: 14, height: 14, objectFit: "cover", borderRadius: 3 }} />

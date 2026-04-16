@@ -10,7 +10,7 @@ const moods = [
 export default function HonestyDrop() {
   const [sel, setSel] = useState<string|null>(null);
   return (
-    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px" }}>
+    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", height: "100%", boxSizing: "border-box" }}>
       <div style={{ fontWeight: 600, color: "#2D1F60", fontSize: 12, marginBottom: 2 }}>Honesty Dro feel today?</div>
       <div style={{ color: "#9B8FC0", fontSize: 10, marginBottom: 8 }}>Honesty Drop</div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
