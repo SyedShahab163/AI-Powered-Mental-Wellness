@@ -1,0 +1,137 @@
+SIMON AI — "The Unburden" Dashboard
+Ye prompt Replit AI Agent ko paste karo. Woh poora project create karega.
+
+Next.js 14 TypeScript Tailwind CSS Recharts npm
+Create a full Next.js 14 project using npm with TypeScript and Tailwind CSS. The app is called "SIMON AI" — a mental wellness dashboard titled "THE UNBURDEN" with the tagline: "Your feelings die here. Your peace begins here."
+
+== PROJECT SETUP ==
+- Framework: Next.js 14 (App Router)
+- Package manager: npm
+- Language: TypeScript
+- Styling: Tailwind CSS
+- Charts: recharts (npm install recharts)
+- Icons: lucide-react (npm install lucide-react)
+- Theme: DARK theme — background #0E0D0F, card background #1A1820, accent purple #7B5EA7, text white
+
+== FILE STRUCTURE ==
+/app
+  layout.tsx        — root layout with dark bg
+  page.tsx          — main dashboard (Overview page)
+/components
+  Sidebar.tsx       — left navigation
+  TopBar.tsx        — header with title + search + bell
+  UserCard.tsx      — profile card (left sidebar bottom)
+  MoodChart.tsx     — "Invisible Path" line chart
+  PressureChart.tsx — "Pressure Exit" line chart
+  LetGoChamber.tsx  — text area with Burn & Release button
+  WoundPouch.tsx    — list of wounds/issues
+  HonestyDrop.tsx   — 4 mood buttons (Happy, Sad, Angry, Neutral)
+  MirrorOfNow.tsx   — mood/stress/progress card
+  UnsaidAdvisor.tsx — AI chat widget
+
+== LAYOUT (EXACT PIXEL MATCH) ==
+3-column layout:
+  LEFT: 220px fixed sidebar (dark #141218)
+  CENTER: flex-1 main content area
+  RIGHT: 280px fixed right panel
+
+LEFT SIDEBAR contains:
+  - Top: SIMON AI logo with flame candle icon (🕯)
+  - User profile photo circle (use placeholder avatar), name "Armaan Khan", Age: 24, Country: India 🇮🇳
+  - Nav items: Overview (active/highlighted purple), Unburden Dialogue, The Deep Well, Pulse Monitor
+  - Bottom: My Fortress, Step Back Light
+  - Footer: "© 2024 SIMON AI. All rights reserved."
+
+TOP BAR contains:
+  - Title: "THE UNBURDEN" (large, white, bold)
+  - Subtitle: "Your feelings die here. Your peace begins here."
+  - Right: Search bar + notification bell with red badge "1"
+
+CENTER MAIN AREA (top to bottom):
+  1. HERO BANNER: Dark purple gradient card, text "Find Your Deep Calm, Armaan!" with candle icon left, meditating woman illustration right (use CSS/SVG placeholder)
+  
+  2. TWO CHARTS SIDE BY SIDE:
+     - LEFT: "Invisible Path" — line chart (purple line), y-axis 1-5 (Mood Level), x-axis: May 10–16, data: [2,2,2.5,3,3.5,4,4.5], dropdown "Last 7 Days"
+     - RIGHT: "Pressure Exit" — line chart (gray/white line), y-axis 0-100, x-axis: May 10–16, data: [80,70,65,55,50,40,35], dropdown "Last 7 Days"
+     Both use recharts LineChart with dark grid, dark background card
+
+  3. "THE LET-GO CHAMBER" card (full width):
+     - Title with candle emoji 🕯
+     - Subtitle: "Write everything. Then watch it vanish."
+     - Large textarea with placeholder "Youn here..."
+     - Two buttons: "Save as Draft" (outline) + "Burn & Release" (purple/orange gradient)
+     - Decorative falling feathers image on right side (CSS animation)
+
+  4. "WOUND POUCH" section:
+     - Title with emoji 🩹
+     - List of 3 items: "Career Conflict", "Close Calls", "Interpersonal Strife"
+     - Each row shows: icon + name + "Added 2 days ago" + 3-dot menu
+     - Bottom dashed button: "+ Pack New Wound"
+
+RIGHT PANEL (top to bottom):
+  1. "HONESTY DRO FEEL TODAY?" — "Honesty Drop" subtitle
+     2x2 grid of mood buttons:
+     - Happy (Elated) — green bg + smiley
+     - Sad (Heavy) — blue bg + sad face  
+     - Angry (Fuming) — red bg + angry face
+     - Neutral (Steadfast) — yellow bg + neutral face
+     Each button is a rounded card with emoji + label + subtitle
+
+  2. "MIRROR OF NOW" card:
+     - Short description: "You've faced conflict, but your focus is shifting. See your reflection."
+     - Three rows: Mood (Good - green badge), Stress (Moderate - orange badge), Progress (72% ↑ - green badge)
+
+  3. "THE UNSAID ADVISOR" card:
+     - Small text input with italic placeholder "*Job ki tension kaise kam karun?*"
+     - AI response bubble below: "Break into 5-minute steps. Then breathe. Do one now."
+     - Small diamond sparkle icon bottom right
+
+BOTTOM FOOTER BAR (full width):
+  - Center text: "Your words die here. No one else reads. Not even us."
+  - Below: "*Tumhare alfaaz yahin khatam ho jaate hain. Koi nahi padhta. Hum bhi nahi.* 🕯"
+
+== STYLING DETAILS ==
+- All cards: bg #1A1820, border 1px solid #2D2A3D, border-radius 12px
+- Sidebar active item: bg #4A3080 (purple), border-radius 8px
+- Purple accent: #7B5EA7 or #9370DB
+- Burn & Release button: gradient from #C05A2A to #8B3A8B
+- All text: white or gray-300 for secondary
+- Candle emoji used decoratively throughout
+- Scrollbar: dark themed, thin
+
+== CHART DATA ==
+Invisible Path (Mood):
+  { date: "May 10", value: 2 },
+  { date: "May 11", value: 2 },
+  { date: "May 12", value: 2.5 },
+  { date: "May 13", value: 3 },
+  { date: "May 14", value: 3.5 },
+  { date: "May 15", value: 4 },
+  { date: "May 16", value: 4.5 }
+
+Pressure Exit:
+  { date: "May 10", value: 80 },
+  { date: "May 11", value: 70 },
+  { date: "May 12", value: 65 },
+  { date: "May 13", value: 55 },
+  { date: "May 14", value: 50 },
+  { date: "May 15", value: 40 },
+  { date: "May 16", value: 35 }
+
+== INTERACTIONS ==
+- Mood buttons: clicking highlights the selected mood (active state with border glow)
+- Let-Go Chamber: "Burn & Release" animates text disappearing (fade out + scale down)
+- "Save as Draft" shows a small toast "Saved to drafts"
+- "+ Pack New Wound" opens an inline input field
+- Unsaid Advisor: pressing Enter sends message (hardcoded AI responses array)
+- Nav items: clicking shows active state change
+
+== PACKAGE.JSON SCRIPTS ==
+"dev": "next dev"
+"build": "next build"  
+"start": "next start"
+
+Make sure to run: npm install
+Then: npm run dev
+
+The app should open on http://localhost:3000 and look EXACTLY like a professional dark-themed mental wellness dashboard matching the reference screenshot provided.
