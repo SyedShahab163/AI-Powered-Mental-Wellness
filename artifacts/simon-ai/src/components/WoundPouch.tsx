@@ -20,7 +20,7 @@ export default function WoundPouch() {
   };
 
   return (
-    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", height: "100%", display: "flex", flexDirection: "column", overflow: "hidden", boxSizing: "border-box" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6, flexShrink: 0 }}>
         <span style={{ fontSize: 13 }}>🩹</span>
         <span style={{ fontWeight: 600, color: "#2D1F60", fontSize: 12 }}>Wound Pouch</span>

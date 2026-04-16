@@ -13,7 +13,7 @@ export default function LetGoChamber() {
   };
 
   return (
-    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", flex: 1, display: "flex", flexDirection: "column" }}>
+    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", height: "100%", display: "flex", flexDirection: "column", boxSizing: "border-box" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
         <img src={`${import.meta.env.BASE_URL}candle-real.png`} alt="candle"
           style={{ width: 16, height: 16, objectFit: "cover", borderRadius: 3 }} />
