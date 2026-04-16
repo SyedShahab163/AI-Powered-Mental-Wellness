@@ -7,46 +7,35 @@ const aiResponses = [
   "Let the feeling pass through you. It won't last.",
   "The problem shrinks when you name it out loud.",
   "You've survived harder days. Today is manageable.",
-  "Put the phone down for 10 minutes. Step outside.",
 ];
 
 export default function UnsaidAdvisor() {
   const [input, setInput] = useState("");
   const [response, setResponse] = useState("Break into 5-minute steps. Then breathe. Do one now.");
-  const [history, setHistory] = useState<string[]>([]);
 
-  const handleSend = () => {
+  const send = () => {
     if (!input.trim()) return;
-    const r = aiResponses[Math.floor(Math.random() * aiResponses.length)];
-    setHistory((prev) => [...prev, input]);
-    setResponse(r);
+    setResponse(aiResponses[Math.floor(Math.random() * aiResponses.length)]);
     setInput("");
   };
 
   return (
-    <div className="rounded-xl p-4 relative" style={{ background: "#1A1820", border: "1px solid #2D2A3D" }}>
-      <h3 className="font-semibold text-white" style={{ fontSize: "13px", marginBottom: "10px" }}>The Unsaid Advisor</h3>
-
-      {history.slice(-1).map((h, i) => (
-        <div key={i} style={{ color: "#7B6FA0", fontSize: "10px", fontStyle: "italic", marginBottom: "6px" }}>"{h}"</div>
-      ))}
-
-      <div className="rounded-lg p-2.5 mb-3" style={{ background: "#12101A", border: "1px solid #2D2A3D" }}>
-        <textarea value={input} onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), handleSend())}
-          placeholder="*Job ki tension kaise kam karun?*"
-          className="w-full bg-transparent outline-none resize-none"
-          style={{ fontSize: "11px", color: "#9B8FC0", fontStyle: "italic", height: "36px" }} />
+    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", position: "relative" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
+        <img src={`${import.meta.env.BASE_URL}candle-real.png`} alt="candle"
+          style={{ width: 14, height: 14, objectFit: "cover", borderRadius: 3 }} />
+        <span style={{ fontWeight: 600, color: "#2D1F60", fontSize: 12 }}>The Unsaid Advisor</span>
       </div>
-
-      <div className="rounded-lg p-3" style={{ background: "#12101A", border: "1px solid #2D2A3D" }}>
-        <p style={{ fontSize: "11px", color: "#ccc", lineHeight: "1.6" }}>{response}</p>
+      <textarea value={input} onChange={e => setInput(e.target.value)}
+        onKeyDown={e => e.key === "Enter" && !e.shiftKey && (e.preventDefault(), send())}
+        placeholder="*Job ki tension kaise kam karun?*"
+        style={{ width: "100%", background: "#F7F5FC", border: "1px solid #E5E0F0", borderRadius: 7, padding: "6px 8px", fontSize: 10, color: "#5A4A8A", fontStyle: "italic", resize: "none", outline: "none", height: 34, fontFamily: "inherit", boxSizing: "border-box" }} />
+      <div style={{ background: "#F0EBF8", border: "1px solid #D8C8F0", borderRadius: 7, padding: "6px 8px", marginTop: 6, fontSize: 10, color: "#3A2070", lineHeight: 1.6, paddingRight: 28 }}>
+        {response}
       </div>
-
-      <button onClick={handleSend}
-        className="absolute bottom-3 right-3 rounded-full flex items-center justify-center transition-colors"
-        style={{ background: "#4A3080", width: "24px", height: "24px" }}>
-        <Sparkles size={12} style={{ color: "#fff" }} />
+      <button onClick={send}
+        style={{ position: "absolute", bottom: 16, right: 16, background: "#4A3080", border: "none", borderRadius: "50%", width: 22, height: 22, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer" }}>
+        <Sparkles size={11} style={{ color: "#fff" }} />
       </button>
     </div>
   );

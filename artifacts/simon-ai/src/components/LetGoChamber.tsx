@@ -12,110 +12,50 @@ export default function LetGoChamber() {
     setTimeout(() => { setText(""); setBurning(false); toast({ title: "Released 🕯", description: "Your words have vanished." }); }, 600);
   };
 
-  const handleSaveDraft = () => {
-    if (!text.trim()) return;
-    toast({ title: "Saved to drafts", description: "Your thoughts are safely stored." });
-  };
-
   return (
-    <div className="rounded-xl p-5 relative overflow-hidden" style={{ background: "#1A1820", border: "1px solid #3D2A1A" }}>
-      <div className="flex items-start gap-2 mb-3">
-        <span style={{ fontSize: "16px" }}>🕯</span>
-        <div>
-          <h3 className="font-semibold text-white" style={{ fontSize: "14px" }}>The Let-Go Chamber</h3>
-          <p style={{ fontSize: "11px", color: "#7B6FA0", marginTop: "1px" }}>Write everything. Then watch it vanish.</p>
-        </div>
+    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", flex: 1, display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
+        <img src={`${import.meta.env.BASE_URL}candle-real.png`} alt="candle"
+          style={{ width: 16, height: 16, objectFit: "cover", borderRadius: 3 }} />
+        <span style={{ fontWeight: 600, color: "#2D1F60", fontSize: 12 }}>The Let-Go Chamber</span>
+        <span style={{ fontSize: 10, color: "#9B8FC0" }}>— Write everything. Then watch it vanish.</span>
       </div>
 
-      <div className="flex gap-4">
-        {/* Text area + buttons */}
-        <div className="flex-1">
-          <textarea
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Youn here..."
-            className={`w-full rounded-lg p-3 resize-none outline-none transition-all ${burning ? "burn-vanish" : ""}`}
-            style={{
-              background: "#12101A",
-              border: "1px solid #2D2A3D",
-              color: "#ddd",
-              fontSize: "13px",
-              height: "110px",
-            }}
-          />
-          <div className="flex gap-3 mt-3">
-            <button onClick={handleSaveDraft}
-              className="rounded-lg px-4 py-2 font-medium transition-colors"
-              style={{ border: "1px solid #3D3A50", color: "#aaa", fontSize: "12px", background: "transparent" }}>
+      <div style={{ display: "flex", gap: 10, flex: 1 }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+          <textarea value={text} onChange={e => setText(e.target.value)} placeholder="Youn here..."
+            className={burning ? "burn-vanish" : ""}
+            style={{ flex: 1, background: "#F7F5FC", border: "1px solid #E5E0F0", borderRadius: 8, padding: "8px 10px", fontSize: 12, color: "#2D1F60", resize: "none", outline: "none", fontFamily: "inherit" }} />
+          <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+            <button onClick={() => text.trim() && toast({ title: "Saved!", description: "Draft saved." })}
+              style={{ border: "1px solid #D8C8F0", color: "#5A4A8A", fontSize: 11, background: "#fff", borderRadius: 7, padding: "5px 12px", cursor: "pointer" }}>
               Save as Draft
             </button>
             <button onClick={handleBurn}
-              className="rounded-lg px-4 py-2 font-medium text-white transition-all hover:opacity-90 active:scale-95"
-              style={{ background: "linear-gradient(to right, #C05A2A, #8B3A8B)", fontSize: "12px" }}>
+              style={{ background: "linear-gradient(to right,#C05A2A,#8B3A8B)", color: "#fff", fontSize: 11, border: "none", borderRadius: 7, padding: "5px 12px", cursor: "pointer", fontWeight: 600 }}>
               Burn & Release
             </button>
           </div>
         </div>
 
-        {/* Real candle image + floating papers */}
-        <div className="flex-shrink-0 relative flex items-end justify-center" style={{ width: "110px", height: "160px" }}>
-          {/* Real candle photo */}
-          <img
-            src={`${import.meta.env.BASE_URL}candle-real.png`}
-            alt="Candle"
-            style={{
-              width: "110px",
-              height: "150px",
-              objectFit: "cover",
-              objectPosition: "center",
-              borderRadius: "8px",
-              opacity: 0.92,
-            }}
-          />
-
-          {/* Floating real-looking paper documents */}
-          <div className="absolute paper-float-1" style={{ bottom: "30px", left: "-10px", zIndex: 10 }}>
-            <div style={{
-              width: "34px", height: "44px",
-              background: "linear-gradient(135deg, #F5F0E8, #EDE8DC)",
-              borderRadius: "3px",
-              boxShadow: "1px 1px 4px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(0,0,0,0.1)",
-              padding: "4px 5px",
-              transform: "rotate(-8deg)",
-            }}>
-              {[0,1,2,3,4].map(i => (
-                <div key={i} style={{ height: "2px", background: "#C0B0A0", borderRadius: "1px", marginBottom: "3px", width: i === 4 ? "60%" : "100%" }} />
-              ))}
+        {/* Real candle + papers */}
+        <div style={{ width: 80, position: "relative", flexShrink: 0 }}>
+          <img src={`${import.meta.env.BASE_URL}candle-real.png`} alt="candle"
+            style={{ width: 80, height: "100%", objectFit: "cover", objectPosition: "center", borderRadius: 8, opacity: 0.9 }} />
+          {/* Floating papers */}
+          <div className="paper-float-1" style={{ position: "absolute", bottom: 20, left: -8, zIndex: 5 }}>
+            <div style={{ width: 28, height: 36, background: "linear-gradient(135deg,#F5F0E8,#EDE8DC)", borderRadius: 3, boxShadow: "1px 1px 4px rgba(0,0,0,0.25)", padding: "4px 5px", transform: "rotate(-8deg)" }}>
+              {[0,1,2,3].map(i => <div key={i} style={{ height: 2, background: "#C0B0A0", borderRadius: 1, marginBottom: 3, width: i===3?"55%":"100%" }} />)}
             </div>
           </div>
-
-          <div className="absolute paper-float-2" style={{ bottom: "20px", right: "-8px", zIndex: 10 }}>
-            <div style={{
-              width: "30px", height: "38px",
-              background: "linear-gradient(135deg, #EDE8DC, #E8E0D0)",
-              borderRadius: "3px",
-              boxShadow: "1px 1px 4px rgba(0,0,0,0.5)",
-              padding: "3px 4px",
-              transform: "rotate(12deg)",
-            }}>
-              {[0,1,2,3].map(i => (
-                <div key={i} style={{ height: "2px", background: "#B8A890", borderRadius: "1px", marginBottom: "3px", width: i === 3 ? "55%" : "100%" }} />
-              ))}
+          <div className="paper-float-2" style={{ position: "absolute", bottom: 10, right: -6, zIndex: 5 }}>
+            <div style={{ width: 24, height: 30, background: "linear-gradient(135deg,#EDE8DC,#E8E0D0)", borderRadius: 3, boxShadow: "1px 1px 3px rgba(0,0,0,0.2)", padding: "3px 4px", transform: "rotate(12deg)" }}>
+              {[0,1,2].map(i => <div key={i} style={{ height: 2, background: "#B8A890", borderRadius: 1, marginBottom: 3 }} />)}
             </div>
           </div>
-
-          <div className="absolute paper-float-3" style={{ bottom: "10px", left: "20px", zIndex: 10 }}>
-            <div style={{
-              width: "26px", height: "32px",
-              background: "linear-gradient(135deg, #F0EBE0, #E8E2D5)",
-              borderRadius: "2px",
-              boxShadow: "1px 1px 3px rgba(0,0,0,0.4)",
-              padding: "3px 4px",
-              transform: "rotate(-4deg)",
-            }}>
-              {[0,1,2].map(i => (
-                <div key={i} style={{ height: "2px", background: "#C0B0A0", borderRadius: "1px", marginBottom: "3px" }} />
-              ))}
+          <div className="paper-float-3" style={{ position: "absolute", bottom: 5, left: 14, zIndex: 5 }}>
+            <div style={{ width: 22, height: 26, background: "linear-gradient(135deg,#F0EBE0,#E8E2D5)", borderRadius: 2, boxShadow: "1px 1px 3px rgba(0,0,0,0.18)", padding: "3px 3px", transform: "rotate(-4deg)" }}>
+              {[0,1].map(i => <div key={i} style={{ height: 2, background: "#C0B0A0", borderRadius: 1, marginBottom: 3 }} />)}
             </div>
           </div>
         </div>

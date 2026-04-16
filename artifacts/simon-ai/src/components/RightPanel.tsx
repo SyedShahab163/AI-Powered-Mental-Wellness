@@ -4,8 +4,8 @@ import UnsaidAdvisor from "./UnsaidAdvisor";
 
 export default function RightPanel() {
   return (
-    <aside className="shrink-0 overflow-y-auto" style={{ width: "275px", background: "#0E0D0F", borderLeft: "1px solid #2D2A3D" }}>
-      <div className="p-4 flex flex-col gap-4">
+    <aside style={{ width: 252, background: "#F7F5FC", borderLeft: "1px solid #E5E0F0", flexShrink: 0, overflowY: "auto", display: "flex", flexDirection: "column" }}>
+      <div style={{ padding: "10px 10px", display: "flex", flexDirection: "column", gap: 8 }}>
         <HonestyDrop />
         <MirrorOfNow />
         <UnsaidAdvisor />

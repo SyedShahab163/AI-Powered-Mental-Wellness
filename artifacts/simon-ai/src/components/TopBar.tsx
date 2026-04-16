@@ -2,23 +2,19 @@ import { Search, Bell } from "lucide-react";
 
 export default function TopBar() {
   return (
-    <header className="flex items-center justify-between px-5 py-3.5 shrink-0" style={{ background: "#0E0D0F", borderBottom: "1px solid #2D2A3D" }}>
+    <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 18px", height: 52, background: "#fff", borderBottom: "1px solid #E5E0F0", flexShrink: 0 }}>
       <div>
-        <h1 className="font-bold text-white tracking-wide" style={{ fontSize: "17px" }}>THE UNBURDEN</h1>
-        <p style={{ fontSize: "11px", color: "#7B6FA0", marginTop: "1px" }}>Your feelings die here. Your peace begins here.</p>
+        <div style={{ fontWeight: 700, color: "#2D1F60", fontSize: 16, letterSpacing: "0.04em" }}>THE UNBURDEN</div>
+        <div style={{ fontSize: 10, color: "#9B8FC0", marginTop: 1 }}>Your feelings die here. Your peace begins here.</div>
       </div>
-      <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2 rounded-lg px-3 py-2" style={{ background: "#1A1820", border: "1px solid #2D2A3D", width: "190px" }}>
-          <Search size={13} style={{ color: "#6B6080" }} />
-          <input type="text" placeholder="Search"
-            className="bg-transparent outline-none flex-1"
-            style={{ fontSize: "12px", color: "#cccccc" }}
-          />
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 6, background: "#F7F5FC", border: "1px solid #E5E0F0", borderRadius: 8, padding: "5px 10px", width: 170 }}>
+          <Search size={12} style={{ color: "#9B8FC0" }} />
+          <input type="text" placeholder="Search" style={{ background: "transparent", border: "none", outline: "none", fontSize: 12, color: "#2D1F60", width: "100%" }} />
         </div>
-        <div className="relative">
-          <Bell size={18} style={{ color: "#9B8FC0", cursor: "pointer" }} />
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white font-bold rounded-full flex items-center justify-center"
-            style={{ fontSize: "9px", width: "15px", height: "15px" }}>1</span>
+        <div style={{ position: "relative" }}>
+          <Bell size={17} style={{ color: "#7B5EA7", cursor: "pointer" }} />
+          <span style={{ position: "absolute", top: -4, right: -4, background: "#ef4444", color: "#fff", fontSize: 8, fontWeight: 700, borderRadius: "50%", width: 13, height: 13, display: "flex", alignItems: "center", justifyContent: "center" }}>1</span>
         </div>
       </div>
     </header>

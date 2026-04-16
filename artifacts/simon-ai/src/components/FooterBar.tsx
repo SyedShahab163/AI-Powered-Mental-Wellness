@@ -1,10 +1,8 @@
 export default function FooterBar() {
   return (
-    <footer className="text-center shrink-0 py-3 px-6" style={{ borderTop: "1px solid #2D2A3D", background: "#0E0D0F" }}>
-      <p style={{ fontSize: "11px", color: "#6B6080" }}>Your words die here. No one else reads. Not even us.</p>
-      <p style={{ fontSize: "10px", color: "#4A4060", fontStyle: "italic", marginTop: "2px" }}>
-        *Tumhare alfaaz yahin khatam ho jaate hain. Koi nahi padhta. Hum bhi nahi.* 🕯
-      </p>
+    <footer style={{ borderTop: "1px solid #E5E0F0", background: "#fff", flexShrink: 0, padding: "5px 16px", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
+      <img src={`${import.meta.env.BASE_URL}candle-real.png`} alt="" style={{ width: 13, height: 13, objectFit: "cover", borderRadius: 2, opacity: 0.7 }} />
+      <p style={{ fontSize: 10, color: "#9B8FC0" }}>Your words die here. No one else reads. Not even us.</p>
     </footer>
   );
 }

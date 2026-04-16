@@ -2,9 +2,9 @@ import { useState } from "react";
 import { MoreVertical, Plus, X } from "lucide-react";
 
 const initialWounds = [
-  { id: 1, title: "Career Conflict", addedAt: "Added 2 days ago" },
-  { id: 2, title: "Close Calls", addedAt: "Added 2 days ago" },
-  { id: 3, title: "Interpersonal Strife", addedAt: "Added 2 days ago" },
+  { id: 1, title: "Career Conflict", addedAt: "2 days ago" },
+  { id: 2, title: "Close Calls", addedAt: "2 days ago" },
+  { id: 3, title: "Interpersonal Strife", addedAt: "2 days ago" },
 ];
 
 export default function WoundPouch() {
@@ -15,34 +15,34 @@ export default function WoundPouch() {
 
   const addWound = () => {
     if (!newWound.trim()) return;
-    setWounds((prev) => [...prev, { id: Date.now(), title: newWound.trim(), addedAt: "Just now" }]);
+    setWounds(p => [...p, { id: Date.now(), title: newWound.trim(), addedAt: "Just now" }]);
     setNewWound(""); setShowInput(false);
   };
 
   return (
-    <div className="rounded-xl p-5" style={{ background: "#1A1820", border: "1px solid #2D2A3D" }}>
-      <div className="flex items-center gap-2 mb-4">
-        <span style={{ fontSize: "14px" }}>🩹</span>
-        <h3 className="font-semibold text-white" style={{ fontSize: "14px" }}>Wound Pouch</h3>
+    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px", flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6, flexShrink: 0 }}>
+        <span style={{ fontSize: 13 }}>🩹</span>
+        <span style={{ fontWeight: 600, color: "#2D1F60", fontSize: 12 }}>Wound Pouch</span>
       </div>
 
-      <div className="flex flex-col gap-2">
-        {wounds.map((wound) => (
-          <div key={wound.id} className="flex items-center justify-between rounded-lg px-4 py-3"
-            style={{ background: "#12101A", border: "1px solid #2D2A3D" }}>
-            <div className="flex items-center gap-3">
-              <span style={{ fontSize: "13px" }}>🩹</span>
-              <span className="text-white font-medium" style={{ fontSize: "12px" }}>{wound.title}</span>
+      <div style={{ display: "flex", flexDirection: "column", gap: 4, overflowY: "auto", flex: 1 }}>
+        {wounds.map(w => (
+          <div key={w.id} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "#F7F5FC", border: "1px solid #E5E0F0", borderRadius: 7, padding: "6px 10px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ fontSize: 11 }}>🩹</span>
+              <span style={{ color: "#2D1F60", fontSize: 11, fontWeight: 500 }}>{w.title}</span>
             </div>
-            <div className="flex items-center gap-3">
-              <span style={{ color: "#6B6080", fontSize: "11px", borderLeft: "1px solid #2D2A3D", paddingLeft: "10px" }}>{wound.addedAt}</span>
-              <div className="relative">
-                <button onClick={() => setOpenMenu(openMenu === wound.id ? null : wound.id)}
-                  style={{ color: "#6B6080" }}><MoreVertical size={13} /></button>
-                {openMenu === wound.id && (
-                  <div className="absolute right-0 top-5 rounded-lg py-1 z-20 shadow-lg" style={{ background: "#2D2A3D", border: "1px solid #3D3A50", width: "100px" }}>
-                    <button onClick={() => { setWounds(p => p.filter(w => w.id !== wound.id)); setOpenMenu(null); }}
-                      className="flex items-center gap-2 px-3 py-1.5 w-full text-left" style={{ color: "#e57373", fontSize: "11px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ color: "#B0A4D0", fontSize: 10, borderLeft: "1px solid #E5E0F0", paddingLeft: 8 }}>Added {w.addedAt}</span>
+              <div style={{ position: "relative" }}>
+                <button onClick={() => setOpenMenu(openMenu === w.id ? null : w.id)} style={{ background: "none", border: "none", cursor: "pointer", color: "#B0A4D0", padding: 2 }}>
+                  <MoreVertical size={12} />
+                </button>
+                {openMenu === w.id && (
+                  <div style={{ position: "absolute", right: 0, top: 18, background: "#fff", border: "1px solid #E5E0F0", borderRadius: 7, padding: "3px 0", zIndex: 20, width: 90, boxShadow: "0 4px 12px rgba(0,0,0,0.1)" }}>
+                    <button onClick={() => { setWounds(p => p.filter(x => x.id !== w.id)); setOpenMenu(null); }}
+                      style={{ display: "flex", alignItems: "center", gap: 5, padding: "5px 10px", width: "100%", background: "none", border: "none", cursor: "pointer", color: "#e57373", fontSize: 11 }}>
                       <X size={10} /> Remove
                     </button>
                   </div>
@@ -53,23 +53,18 @@ export default function WoundPouch() {
         ))}
       </div>
 
-      {showInput && (
-        <div className="mt-3 flex gap-2">
-          <input autoFocus value={newWound} onChange={(e) => setNewWound(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && addWound()}
-            placeholder="Name this wound..."
-            className="flex-1 rounded-lg px-3 py-2 outline-none"
-            style={{ background: "#12101A", border: "1px solid #7B5EA7", color: "#ddd", fontSize: "12px" }} />
-          <button onClick={addWound} className="px-3 py-2 rounded-lg text-white" style={{ background: "#4A3080", fontSize: "12px" }}>Add</button>
-          <button onClick={() => setShowInput(false)} className="px-3 py-2 rounded-lg" style={{ border: "1px solid #2D2A3D", color: "#aaa", fontSize: "12px" }}>Cancel</button>
+      {showInput ? (
+        <div style={{ display: "flex", gap: 6, marginTop: 6, flexShrink: 0 }}>
+          <input autoFocus value={newWound} onChange={e => setNewWound(e.target.value)} onKeyDown={e => e.key === "Enter" && addWound()}
+            placeholder="Name this wound…"
+            style={{ flex: 1, background: "#F7F5FC", border: "1px solid #7B5EA7", borderRadius: 7, padding: "5px 8px", fontSize: 11, color: "#2D1F60", outline: "none" }} />
+          <button onClick={addWound} style={{ background: "#4A3080", color: "#fff", border: "none", borderRadius: 7, padding: "5px 10px", fontSize: 11, cursor: "pointer" }}>Add</button>
+          <button onClick={() => setShowInput(false)} style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 7, padding: "5px 10px", fontSize: 11, cursor: "pointer", color: "#6B5A9B" }}>✕</button>
         </div>
-      )}
-
-      {!showInput && (
+      ) : (
         <button onClick={() => setShowInput(true)}
-          className="mt-3 w-full flex items-center justify-center gap-2 py-2.5 rounded-lg transition-all"
-          style={{ border: "1px dashed #2D2A3D", color: "#7B6FA0", fontSize: "12px" }}>
-          <Plus size={13} /> Pack New Wound
+          style={{ marginTop: 6, width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: 5, padding: "6px", borderRadius: 7, border: "1px dashed #D8C8F0", background: "transparent", color: "#9B8FC0", fontSize: 11, cursor: "pointer", flexShrink: 0 }}>
+          <Plus size={12} /> Pack New Wound
         </button>
       )}
     </div>

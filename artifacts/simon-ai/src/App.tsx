@@ -13,8 +13,7 @@ import Signup from "@/pages/Signup";
 
 const queryClient = new QueryClient();
 
-type Page = "home" | "login" | "signup" | "overview" | "dialogue" | "deep-well" | "pulse" | "fortress" | "step-back";
-
+type Page = "home"|"login"|"signup"|"overview"|"dialogue"|"deep-well"|"pulse"|"fortress"|"step-back";
 interface User { name: string; age: string; country: string; }
 
 function App() {
@@ -32,28 +31,28 @@ function App() {
   const handleLogin = (u: User) => { setUser(u); setPage("overview"); };
   const handleLogout = () => { setUser(null); setPage("home"); };
 
-  if (page === "home") return <Home onNavigate={(p) => setPage(p as Page)} />;
-  if (page === "login") return <Login onLogin={handleLogin} onNavigate={(p) => setPage(p as Page)} />;
-  if (page === "signup") return <Signup onLogin={handleLogin} onNavigate={(p) => setPage(p as Page)} />;
+  if (page === "home") return <Home onNavigate={p => setPage(p as Page)} />;
+  if (page === "login") return <Login onLogin={handleLogin} onNavigate={p => setPage(p as Page)} />;
+  if (page === "signup") return <Signup onLogin={handleLogin} onNavigate={p => setPage(p as Page)} />;
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="flex overflow-hidden" style={{ height: "100vh", background: "#0E0D0F" }}>
-          <Sidebar activePage={page} onNavigate={(p) => setPage(p as Page)} user={user} onLogout={handleLogout} />
-          <div className="flex flex-col flex-1 overflow-hidden">
+        <div style={{ display: "flex", height: "100vh", overflow: "hidden", background: "#F7F5FC" }}>
+          <Sidebar activePage={page} onNavigate={p => setPage(p as Page)} user={user} onLogout={handleLogout} />
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
             <TopBar />
-            <div className="flex flex-1 overflow-hidden">
-              <main className="flex-1 overflow-y-auto" style={{ background: "#0E0D0F" }}>
-                {page === "overview" && <Dashboard userName={user?.name?.split(" ")[0]} />}
-                {page !== "overview" && (
-                  <div className="flex items-center justify-center h-full">
-                    <div className="text-center">
-                      <span style={{ fontSize: "36px", display: "block", marginBottom: "10px" }}>🕯</span>
-                      <p style={{ color: "#7B6FA0", fontSize: "13px" }}>Coming soon...</p>
+            <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
+              <main style={{ flex: 1, overflow: "hidden", display: "flex" }}>
+                {page === "overview"
+                  ? <Dashboard userName={user?.name?.split(" ")[0]} />
+                  : (
+                    <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 8 }}>
+                      <img src={`${import.meta.env.BASE_URL}candle-real.png`} alt="candle" style={{ width: 50, height: 60, objectFit: "cover", borderRadius: 8, opacity: 0.7 }} />
+                      <p style={{ color: "#9B8FC0", fontSize: 13 }}>Coming soon…</p>
                     </div>
-                  </div>
-                )}
+                  )
+                }
               </main>
               <RightPanel />
             </div>

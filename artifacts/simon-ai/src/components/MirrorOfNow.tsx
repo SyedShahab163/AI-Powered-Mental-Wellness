@@ -1,29 +1,29 @@
 import { ClipboardList } from "lucide-react";
 
 const metrics = [
-  { label: "Mood", value: "Good", emoji: "😌", valueStyle: { background: "#1A3A2A", color: "#4ADE80", border: "1px solid #2A4A3A", fontSize: "10px", padding: "2px 8px", borderRadius: "6px" } },
-  { label: "Stress", value: "Moderate", emoji: "🔥", valueStyle: { background: "#3A2A1A", color: "#FB923C", border: "1px solid #4A3A2A", fontSize: "10px", padding: "2px 8px", borderRadius: "6px" } },
-  { label: "Progress", value: "72% ↑", emoji: "📈", valueStyle: { background: "#1A3A2A", color: "#4ADE80", border: "1px solid #2A4A3A", fontSize: "10px", padding: "2px 8px", borderRadius: "6px" } },
+  { label: "Mood",     value: "Good",     emoji: "😌", badge: { background: "#DCFCE7", color: "#166534", border: "1px solid #BBF7D0" } },
+  { label: "Stress",   value: "Moderate", emoji: "🔥", badge: { background: "#FEF3C7", color: "#92400E", border: "1px solid #FDE68A" } },
+  { label: "Progress", value: "72% ↑",    emoji: "📈", badge: { background: "#DCFCE7", color: "#166534", border: "1px solid #BBF7D0" } },
 ];
 
 export default function MirrorOfNow() {
   return (
-    <div className="rounded-xl p-4" style={{ background: "#1A1820", border: "1px solid #2D2A3D" }}>
-      <div className="flex items-center gap-2 mb-2">
-        <ClipboardList size={13} style={{ color: "#9B7EC8" }} />
-        <h3 className="font-semibold text-white" style={{ fontSize: "13px" }}>Mirror of Now</h3>
+    <div style={{ background: "#fff", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 5, marginBottom: 5 }}>
+        <ClipboardList size={12} style={{ color: "#7B5EA7" }} />
+        <span style={{ fontWeight: 600, color: "#2D1F60", fontSize: 12 }}>Mirror of Now</span>
       </div>
-      <p style={{ color: "#7B6FA0", fontSize: "11px", lineHeight: "1.5", marginBottom: "12px" }}>
-        You've faced conflict, but your focus is shifting. See your reflection.
+      <p style={{ color: "#8A7AB0", fontSize: 10, lineHeight: 1.5, marginBottom: 10 }}>
+        You've faced conflict, but your focus is shifting.
       </p>
-      <div className="flex flex-col gap-3">
-        {metrics.map((m) => (
-          <div key={m.label} className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span style={{ fontSize: "14px" }}>{m.emoji}</span>
-              <span style={{ color: "#aaa", fontSize: "12px" }}>{m.label}</span>
+      <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+        {metrics.map(m => (
+          <div key={m.label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+              <span style={{ fontSize: 13 }}>{m.emoji}</span>
+              <span style={{ color: "#5A4A8A", fontSize: 11 }}>{m.label}</span>
             </div>
-            <span style={m.valueStyle}>{m.value}</span>
+            <span style={{ ...m.badge, fontSize: 9, padding: "2px 7px", borderRadius: 5, fontWeight: 600 }}>{m.value}</span>
           </div>
         ))}
       </div>
