@@ -54,7 +54,6 @@ function App() {
                   )
                 }
               </main>
-              <RightPanel />
             </div>
             <FooterBar />
           </div>
