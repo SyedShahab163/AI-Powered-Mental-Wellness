@@ -2,7 +2,7 @@ import { Search, Bell } from "lucide-react";
 
 export default function TopBar() {
   return (
-    <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 18px", height: 52, background: "#fff", borderBottom: "1px solid #E5E0F0", flexShrink: 0 }}>
+    <header style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 18px", height: 52, background: "#fff", flexShrink: 0, width: "100%" }}>
       <div>
         <div style={{ fontWeight: 700, color: "#2D1F60", fontSize: 16, letterSpacing: "0.04em" }}>THE UNBURDEN</div>
         <div style={{ fontSize: 10, color: "#9B8FC0", marginTop: 1 }}>Your feelings die here. Your peace begins here.</div>
