@@ -10,20 +10,20 @@ const exercises = {
 };
 
 const grounding = [
-  { n: 5, sense: "things you can SEE", icon: "👀" },
+  { n: 5, sense: "things you can SEE",   icon: "👀" },
   { n: 4, sense: "things you can TOUCH", icon: "🤚" },
-  { n: 3, sense: "things you can HEAR", icon: "👂" },
+  { n: 3, sense: "things you can HEAR",  icon: "👂" },
   { n: 2, sense: "things you can SMELL", icon: "👃" },
-  { n: 1, sense: "thing you can TASTE", icon: "👅" },
+  { n: 1, sense: "thing you can TASTE",  icon: "👅" },
 ];
 
 export default function StepBackLight() {
-  const [ex, setEx] = useState<Exercise>("478");
-  const [mode, setMode] = useState<Mode>("idle");
-  const [phase, setPhase] = useState(0);
+  const [ex, setEx]         = useState<Exercise>("478");
+  const [mode, setMode]     = useState<Mode>("idle");
+  const [phase, setPhase]   = useState(0);
   const [timeLeft, setTimeLeft] = useState(0);
-  const [round, setRound] = useState(1);
-  const [scale, setScale] = useState(1);
+  const [round, setRound]   = useState(1);
+  const [scale, setScale]   = useState(1);
   const timerRef = useRef<number | null>(null);
   const cfg = exercises[ex];
 
@@ -60,17 +60,21 @@ export default function StepBackLight() {
   }, [mode, ex]);
 
   return (
-    <div style={{ display: "flex", height: "100%", background: "#F7F5FC", overflow: "hidden" }}>
-      {/* Left: breathing */}
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "14px 16px", overflow: "hidden" }}>
-        <div style={{ fontWeight: 700, color: "#2D1F60", fontSize: 14, marginBottom: 4 }}>🌬 Step Back Light</div>
-        <div style={{ color: "#9B8FC0", fontSize: 11, marginBottom: 12 }}>Take a breath. Everything can wait for 2 minutes.</div>
+    <div style={{ display: "flex", width: "100%", height: "100%", background: "#F7F5FC", overflow: "hidden" }}>
+      <style>{`
+        @media (max-width: 680px) { .sbl-right { display: none !important; } }
+      `}</style>
 
-        {/* Exercise selector */}
-        <div style={{ display: "flex", gap: 6, marginBottom: 14, flexShrink: 0 }}>
+      {/* LEFT: breathing — full remaining width */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "14px 20px", overflow: "hidden", minWidth: 0 }}>
+        <div style={{ fontWeight: 700, color: "#2D1F60", fontSize: 15, marginBottom: 2, flexShrink: 0 }}>🌬 Step Back Light</div>
+        <div style={{ color: "#9B8FC0", fontSize: 11, marginBottom: 14, flexShrink: 0 }}>Take a breath. Everything can wait for 2 minutes.</div>
+
+        {/* Exercise tabs */}
+        <div style={{ display: "flex", gap: 8, marginBottom: 14, flexShrink: 0, flexWrap: "wrap" }}>
           {(Object.keys(exercises) as Exercise[]).map(k => (
             <button key={k} onClick={() => { setEx(k); stop(); }}
-              style={{ flex: 1, padding: "7px 6px", borderRadius: 9, border: ex === k ? `2px solid ${exercises[k].color}` : "1px solid #E5E0F0", background: ex === k ? `${exercises[k].color}18` : "#fff", cursor: "pointer", fontSize: 10, fontWeight: ex === k ? 700 : 400, color: ex === k ? exercises[k].color : "#5A4A8A" }}>
+              style={{ flex: 1, minWidth: 100, padding: "8px 10px", borderRadius: 10, border: ex === k ? `2px solid ${exercises[k].color}` : "1px solid #E5E0F0", background: ex === k ? `${exercises[k].color}18` : "#fff", cursor: "pointer", fontSize: 11, fontWeight: ex === k ? 700 : 400, color: ex === k ? exercises[k].color : "#5A4A8A", transition: "all .2s" }}>
               {exercises[k].name}
             </button>
           ))}
@@ -80,52 +84,51 @@ export default function StepBackLight() {
         <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
           {mode === "done" ? (
             <div style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 48, marginBottom: 10 }}>✨</div>
-              <div style={{ fontWeight: 700, color: "#2D1F60", fontSize: 18, marginBottom: 6 }}>Well done!</div>
-              <div style={{ color: "#9B8FC0", fontSize: 13, marginBottom: 16 }}>Tumhara dil thoda halka hua hoga.</div>
-              <button onClick={stop} style={{ background: "#4A3080", border: "none", borderRadius: 9, padding: "9px 22px", color: "#fff", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>Go Again</button>
+              <div style={{ fontSize: 56, marginBottom: 12 }}>✨</div>
+              <div style={{ fontWeight: 700, color: "#2D1F60", fontSize: 22, marginBottom: 8 }}>Well done!</div>
+              <div style={{ color: "#9B8FC0", fontSize: 14, marginBottom: 20 }}>Tumhara dil thoda halka hua hoga.</div>
+              <button onClick={stop} style={{ background: "#4A3080", border: "none", borderRadius: 10, padding: "10px 28px", color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Go Again</button>
             </div>
           ) : (
             <>
-              <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 20 }}>
-                {/* Ripple ring */}
-                <div style={{ position: "absolute", width: 160, height: 160, borderRadius: "50%", border: `2px solid ${cfg.color}30`, transform: `scale(${scale * 1.2})`, transition: `transform ${cfg.durations[phase]}s ease-in-out` }} />
-                {/* Main circle */}
-                <div style={{ width: 130, height: 130, borderRadius: "50%", background: `radial-gradient(circle, ${cfg.color}40, ${cfg.color}15)`, border: `3px solid ${cfg.color}`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", transform: `scale(${scale})`, transition: `transform ${cfg.durations[phase]}s ease-in-out`, boxShadow: `0 0 30px ${cfg.color}30` }}>
+              <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24 }}>
+                <div style={{ position: "absolute", width: 200, height: 200, borderRadius: "50%", border: `2px solid ${cfg.color}25`, transform: `scale(${scale * 1.18})`, transition: `transform ${cfg.durations[phase]}s ease-in-out` }} />
+                <div style={{ position: "absolute", width: 200, height: 200, borderRadius: "50%", border: `1px solid ${cfg.color}15`, transform: `scale(${scale * 1.35})`, transition: `transform ${cfg.durations[phase]}s ease-in-out` }} />
+                <div style={{ width: 160, height: 160, borderRadius: "50%", background: `radial-gradient(circle, ${cfg.color}45, ${cfg.color}18)`, border: `3px solid ${cfg.color}`, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", transform: `scale(${scale})`, transition: `transform ${cfg.durations[phase]}s ease-in-out`, boxShadow: `0 0 40px ${cfg.color}30` }}>
                   {mode === "running" && <>
-                    <div style={{ fontWeight: 700, color: cfg.color, fontSize: 13 }}>{cfg.phases[phase]}</div>
-                    <div style={{ fontWeight: 800, color: "#2D1F60", fontSize: 28 }}>{timeLeft}</div>
+                    <div style={{ fontWeight: 700, color: cfg.color, fontSize: 14 }}>{cfg.phases[phase]}</div>
+                    <div style={{ fontWeight: 800, color: "#2D1F60", fontSize: 36 }}>{timeLeft}</div>
                   </>}
-                  {mode === "idle" && <div style={{ fontSize: 30 }}>🌬</div>}
+                  {mode === "idle" && <div style={{ fontSize: 40 }}>🌬</div>}
                 </div>
               </div>
 
-              <div style={{ color: "#9B8FC0", fontSize: 11, marginBottom: 6 }}>{cfg.desc}</div>
-              {mode === "running" && <div style={{ color: "#B0A4D0", fontSize: 10, marginBottom: 14 }}>Round {round} of {cfg.rounds}</div>}
+              <div style={{ color: "#9B8FC0", fontSize: 12, marginBottom: 6, textAlign: "center" }}>{cfg.desc}</div>
+              {mode === "running" && <div style={{ color: "#B0A4D0", fontSize: 11, marginBottom: 16 }}>Round {round} of {cfg.rounds}</div>}
 
               {mode === "idle"
-                ? <button onClick={start} style={{ background: "#4A3080", border: "none", borderRadius: 9, padding: "9px 28px", color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Begin</button>
-                : <button onClick={stop}  style={{ background: "transparent", border: "1px solid #D0C0F0", borderRadius: 9, padding: "7px 20px", color: "#7B5EA7", fontSize: 12, cursor: "pointer" }}>Stop</button>
+                ? <button onClick={start} style={{ background: "#4A3080", border: "none", borderRadius: 10, padding: "10px 32px", color: "#fff", fontSize: 14, fontWeight: 600, cursor: "pointer", boxShadow: "0 4px 16px rgba(74,48,128,0.28)" }}>Begin</button>
+                : <button onClick={stop}  style={{ background: "transparent", border: "1px solid #D0C0F0", borderRadius: 10, padding: "8px 24px", color: "#7B5EA7", fontSize: 13, cursor: "pointer" }}>Stop</button>
               }
             </>
           )}
         </div>
       </div>
 
-      {/* Right: 5-4-3-2-1 grounding */}
-      <div style={{ width: 220, background: "#fff", borderLeft: "1px solid #E5E0F0", padding: "14px 12px", flexShrink: 0, overflowY: "auto" }}>
-        <div style={{ fontWeight: 700, color: "#2D1F60", fontSize: 12, marginBottom: 4 }}>🌿 5-4-3-2-1 Grounding</div>
-        <div style={{ color: "#9B8FC0", fontSize: 10, marginBottom: 12, lineHeight: 1.5 }}>Anxiety ka signal hay ke tum present nahi. Yeh technique tumhein wapas laati hay.</div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      {/* RIGHT: grounding — percentage-based width */}
+      <div className="sbl-right" style={{ width: "26%", minWidth: 200, maxWidth: 270, background: "#fff", borderLeft: "1px solid #E5E0F0", padding: "14px 14px", flexShrink: 0, overflowY: "auto" }}>
+        <div style={{ fontWeight: 700, color: "#2D1F60", fontSize: 13, marginBottom: 4 }}>🌿 5-4-3-2-1 Grounding</div>
+        <div style={{ color: "#9B8FC0", fontSize: 10, marginBottom: 14, lineHeight: 1.6 }}>Anxiety ka signal hay ke tum present nahi. Yeh technique tumhein wapas laati hay.</div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 9 }}>
           {grounding.map(g => (
-            <div key={g.n} style={{ background: "#F7F5FC", border: "1px solid #E5E0F0", borderRadius: 9, padding: "9px 11px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
-                <span style={{ fontSize: 14 }}>{g.icon}</span>
-                <span style={{ fontWeight: 700, color: "#4A3080", fontSize: 12 }}>{g.n}</span>
+            <div key={g.n} style={{ background: "#F7F5FC", border: "1px solid #E5E0F0", borderRadius: 10, padding: "10px 12px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 6 }}>
+                <span style={{ fontSize: 15 }}>{g.icon}</span>
+                <span style={{ fontWeight: 700, color: "#4A3080", fontSize: 13 }}>{g.n}</span>
                 <span style={{ color: "#5A4A8A", fontSize: 11 }}>{g.sense}</span>
               </div>
               <input placeholder={`Name ${g.n}…`}
-                style={{ width: "100%", background: "#fff", border: "1px solid #E5E0F0", borderRadius: 6, padding: "5px 8px", fontSize: 11, color: "#2D1F60", outline: "none", boxSizing: "border-box" }} />
+                style={{ width: "100%", background: "#fff", border: "1px solid #E5E0F0", borderRadius: 7, padding: "6px 10px", fontSize: 12, color: "#2D1F60", outline: "none", boxSizing: "border-box" }} />
             </div>
           ))}
         </div>
