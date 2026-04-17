@@ -23,48 +23,65 @@ export default function Login({ onLogin, onNavigate }: LoginProps) {
     } else setError("No account found. Please sign up first.");
   };
 
-  const inp: React.CSSProperties = { width: "100%", background: "#F7F5FC", border: "1px solid #E5E0F0", borderRadius: 8, padding: "8px 10px", fontSize: 13, color: "#2D1F60", outline: "none", boxSizing: "border-box" };
-  const lbl: React.CSSProperties = { fontSize: 11, fontWeight: 600, color: "#5A4A8A", display: "block", marginBottom: 5 };
+  const inp: React.CSSProperties = {
+    width: "100%", background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)",
+    borderRadius: 10, padding: "10px 14px", fontSize: 13, color: "#fff", outline: "none",
+    boxSizing: "border-box",
+  };
+  const lbl: React.CSSProperties = { fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.75)", display: "block", marginBottom: 5 };
 
   return (
-    <div style={{ height: "100vh", display: "flex", overflow: "hidden", background: "#F7F5FC" }}>
-      {/* Left panel */}
-      <div style={{ width: 320, background: "linear-gradient(160deg,#2A1B4A,#4A2878)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 32, flexShrink: 0 }}>
-        <img src={`${import.meta.env.BASE_URL}candle-real.png`} alt="candle"
-          style={{ width: 110, height: 140, objectFit: "cover", borderRadius: 12, boxShadow: "0 0 32px rgba(255,140,0,0.35)", marginBottom: 20 }} />
-        <div style={{ color: "#fff", fontWeight: 700, fontSize: 22, marginBottom: 8 }}>SIMON AI</div>
-        <div style={{ color: "#C9A0DC", fontSize: 13, textAlign: "center", lineHeight: 1.6 }}>Your feelings die here.<br />Your peace begins here.</div>
-      </div>
+    <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden", position: "relative", background: "#1A0A3C" }}>
+      <style>{`
+        @keyframes blobFloat1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(30px,-20px) scale(1.08)} }
+        @keyframes blobFloat2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-20px,30px) scale(1.05)} }
+        @keyframes blobFloat3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(15px,15px) scale(1.06)} }
+        ::placeholder { color: rgba(255,255,255,0.35) !important; }
+      `}</style>
 
-      {/* Right form */}
-      <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: "100%", maxWidth: 360, padding: 32 }}>
-          <h2 style={{ color: "#2D1F60", fontSize: 22, fontWeight: 700, marginBottom: 4 }}>Welcome back</h2>
-          <p style={{ color: "#9B8FC0", fontSize: 12, marginBottom: 24 }}>Your safe space is waiting for you.</p>
+      {/* Blurred background blobs */}
+      <div style={{ position:"absolute", width:400, height:400, borderRadius:"50%", background:"radial-gradient(circle, #7C3AED 0%, #4C1D95 60%, transparent 80%)", top:-80, left:-80, filter:"blur(80px)", opacity:.7, animation:"blobFloat1 8s ease-in-out infinite" }} />
+      <div style={{ position:"absolute", width:350, height:350, borderRadius:"50%", background:"radial-gradient(circle, #9333EA 0%, #5B21B6 60%, transparent 80%)", bottom:-60, right:-60, filter:"blur(70px)", opacity:.65, animation:"blobFloat2 10s ease-in-out infinite" }} />
+      <div style={{ position:"absolute", width:250, height:250, borderRadius:"50%", background:"radial-gradient(circle, #6D28D9 0%, transparent 70%)", top:"40%", right:"20%", filter:"blur(60px)", opacity:.5, animation:"blobFloat3 7s ease-in-out infinite" }} />
 
-          {error && <div style={{ background: "#FEE2E2", border: "1px solid #FCA5A5", color: "#991B1B", fontSize: 11, borderRadius: 7, padding: "7px 10px", marginBottom: 14 }}>{error}</div>}
+      {/* Glassmorphism card */}
+      <div style={{ position:"relative", zIndex:2, width:"100%", maxWidth:420, margin:"0 16px", background:"rgba(255,255,255,0.08)", backdropFilter:"blur(24px)", WebkitBackdropFilter:"blur(24px)", borderRadius:24, border:"1px solid rgba(255,255,255,0.15)", padding:"36px 36px", boxShadow:"0 24px 80px rgba(0,0,0,0.4)" }}>
 
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <div><label style={lbl}>Email Address</label><input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" style={inp} /></div>
-            <div>
-              <label style={lbl}>Password</label>
-              <div style={{ position: "relative" }}>
-                <input type={showPass ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter your password" style={{ ...inp, paddingRight: 34 }} />
-                <button type="button" onClick={() => setShowPass(!showPass)} style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", color: "#9B8FC0" }}>
-                  {showPass ? <EyeOff size={14} /> : <Eye size={14} />}
-                </button>
-              </div>
-            </div>
-            <button type="submit" style={{ background: "#4A3080", color: "#fff", border: "none", borderRadius: 9, padding: "10px", fontSize: 13, fontWeight: 600, cursor: "pointer", marginTop: 4, boxShadow: "0 4px 14px rgba(74,48,128,0.25)" }}>
-              Sign In
-            </button>
-          </form>
-
-          <p style={{ textAlign: "center", fontSize: 11, color: "#9B8FC0", marginTop: 18 }}>
-            Don't have an account?{" "}
-            <button onClick={() => onNavigate("signup")} style={{ background: "none", border: "none", color: "#4A3080", fontWeight: 700, cursor: "pointer", fontSize: 11 }}>Sign up</button>
-          </p>
+        {/* Logo */}
+        <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:28 }}>
+          <div style={{ background:"linear-gradient(135deg,#7C3AED,#A78BFA)", borderRadius:10, width:36, height:36, display:"flex", alignItems:"center", justifyContent:"center", fontSize:18 }}>🕯</div>
+          <div>
+            <div style={{ fontWeight:800, color:"#fff", fontSize:16 }}>SIMON AI</div>
+            <div style={{ fontSize:10, color:"rgba(196,181,253,0.8)" }}>The Unburden</div>
+          </div>
         </div>
+
+        <h2 style={{ color:"#fff", fontSize:24, fontWeight:700, marginBottom:4 }}>Welcome back</h2>
+        <p style={{ color:"rgba(196,181,253,0.75)", fontSize:12, marginBottom:24 }}>Your safe space is waiting for you.</p>
+
+        {error && <div style={{ background:"rgba(254,226,226,0.15)", border:"1px solid rgba(252,165,165,0.3)", color:"#FCA5A5", fontSize:11, borderRadius:8, padding:"8px 12px", marginBottom:14 }}>{error}</div>}
+
+        <form onSubmit={handleSubmit} style={{ display:"flex", flexDirection:"column", gap:14 }}>
+          <div><label style={lbl}>Email Address</label><input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" style={inp} /></div>
+          <div>
+            <label style={lbl}>Password</label>
+            <div style={{ position:"relative" }}>
+              <input type={showPass ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter your password" style={{ ...inp, paddingRight:36 }} />
+              <button type="button" onClick={() => setShowPass(!showPass)} style={{ position:"absolute", right:12, top:"50%", transform:"translateY(-50%)", background:"none", border:"none", cursor:"pointer", color:"rgba(255,255,255,0.5)" }}>
+                {showPass ? <EyeOff size={14} /> : <Eye size={14} />}
+              </button>
+            </div>
+          </div>
+          <button type="submit" style={{ background:"linear-gradient(135deg,#7C3AED,#9333EA)", color:"#fff", border:"none", borderRadius:12, padding:"12px", fontSize:14, fontWeight:700, cursor:"pointer", marginTop:4, boxShadow:"0 4px 20px rgba(124,58,237,0.5)", letterSpacing:"0.02em" }}>
+            Sign In
+          </button>
+        </form>
+
+        <p style={{ textAlign:"center", fontSize:12, color:"rgba(196,181,253,0.7)", marginTop:20 }}>
+          Don't have an account?{" "}
+          <button onClick={() => onNavigate("signup")} style={{ background:"none", border:"none", color:"#C4B5FD", fontWeight:700, cursor:"pointer", fontSize:12 }}>Sign up</button>
+        </p>
+        <p style={{ textAlign:"center", fontSize:11, color:"rgba(255,255,255,0.3)", marginTop:10, cursor:"pointer" }} onClick={() => onNavigate("home")}>← Back to home</p>
       </div>
     </div>
   );

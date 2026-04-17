@@ -94,6 +94,10 @@ export default function Home({ onNavigate }: HomeProps) {
         @media (max-width: 480px) {
           .home-grid { grid-template-columns: 1fr !important; }
           .home-title { font-size: 26px !important; }
+          .pricing-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 700px) {
+          .pricing-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -172,6 +176,83 @@ export default function Home({ onNavigate }: HomeProps) {
               <div style={{ color: "#9B8FC0", fontSize: 12, lineHeight: 1.65 }}>{f.desc}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── PRICING ── */}
+      <section style={{ background: "linear-gradient(180deg, #0F0625 0%, #1A0A3C 100%)", padding: "56px 40px 60px", marginTop: 16 }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 36 }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(139,92,246,0.2)", border: "1px solid rgba(139,92,246,0.4)", borderRadius: 20, padding: "5px 16px", fontSize: 11, color: "#C4B5FD", marginBottom: 16, fontWeight: 600 }}>✦ Upgrade your wellness experience</div>
+            <div style={{ fontWeight: 800, color: "#fff", fontSize: 30, marginBottom: 10 }}>Take your wellness further</div>
+            <div style={{ color: "rgba(196,181,253,0.7)", fontSize: 13, lineHeight: 1.7, maxWidth: 400, margin: "0 auto" }}>Unlock unlimited journaling, advanced AI conversations,<br />and deep wellness insights.</div>
+          </div>
+
+          <div className="pricing-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 18 }}>
+            {/* FREE */}
+            <div style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 20, padding: "28px 24px", backdropFilter: "blur(12px)" }}>
+              <div style={{ color: "#fff", fontWeight: 700, fontSize: 16, marginBottom: 4 }}>Free</div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: 8 }}>
+                <span style={{ color: "#fff", fontWeight: 800, fontSize: 32 }}>$0</span>
+                <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>/forever</span>
+              </div>
+              <div style={{ color: "rgba(196,181,253,0.65)", fontSize: 11, marginBottom: 20 }}>Essential wellness tools for getting started.</div>
+              {[
+                "Basic mood tracking",
+                "Personal journal (50 entries/mo)",
+                "Breathing exercises",
+                "Wellness dashboard",
+              ].map(f => <div key={f} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10, color: "rgba(255,255,255,0.75)", fontSize: 12 }}><span style={{ color: "#7C3AED" }}>✓</span>{f}</div>)}
+              {[
+                "Advanced AI chat",
+                "Unlimited journal entries",
+                "Pulse trend analysis",
+              ].map(f => <div key={f} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10, color: "rgba(255,255,255,0.28)", fontSize: 12 }}><span>🔒</span>{f}</div>)}
+              <button onClick={() => onNavigate("signup")} style={{ width: "100%", marginTop: 16, background: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 12, padding: "11px", color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>Current Plan</button>
+            </div>
+
+            {/* PREMIUM */}
+            <div style={{ background: "rgba(124,58,237,0.25)", border: "2px solid #7C3AED", borderRadius: 20, padding: "28px 24px", backdropFilter: "blur(12px)", position: "relative" }}>
+              <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#7C3AED", borderRadius: 20, padding: "3px 14px", fontSize: 10, color: "#fff", fontWeight: 700, whiteSpace: "nowrap" }}>Most Popular</div>
+              <div style={{ color: "#fff", fontWeight: 700, fontSize: 16, marginBottom: 4 }}>Premium</div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: 8 }}>
+                <span style={{ color: "#fff", fontWeight: 800, fontSize: 32 }}>$9</span>
+                <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>/per month</span>
+              </div>
+              <div style={{ color: "rgba(196,181,253,0.65)", fontSize: 11, marginBottom: 20 }}>Full access to every wellness feature.</div>
+              {[
+                "Everything in Free",
+                "Unlimited mood & journal entries",
+                "Advanced AI companion (GPT-4)",
+                "Detailed trend analytics",
+                "Unlimited breathing sessions",
+                "Priority email support",
+                "Early access to new features",
+              ].map(f => <div key={f} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10, color: "rgba(255,255,255,0.85)", fontSize: 12 }}><span style={{ color: "#A78BFA" }}>✓</span>{f}</div>)}
+              <button onClick={() => onNavigate("signup")} style={{ width: "100%", marginTop: 16, background: "linear-gradient(135deg,#7C3AED,#9333EA)", border: "none", borderRadius: 12, padding: "12px", color: "#fff", fontSize: 13, fontWeight: 700, cursor: "pointer", boxShadow: "0 4px 20px rgba(124,58,237,0.5)" }}>Upgrade to Premium</button>
+            </div>
+
+            {/* ENTERPRISE */}
+            <div style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(234,179,8,0.3)", borderRadius: 20, padding: "28px 24px", backdropFilter: "blur(12px)", position: "relative" }}>
+              <div style={{ position: "absolute", top: -13, left: "50%", transform: "translateX(-50%)", background: "#EAB308", borderRadius: 20, padding: "3px 14px", fontSize: 10, color: "#1A0A3C", fontWeight: 700, whiteSpace: "nowrap" }}>Teams</div>
+              <div style={{ color: "#fff", fontWeight: 700, fontSize: 16, marginBottom: 4 }}>Enterprise</div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 4, marginBottom: 8 }}>
+                <span style={{ color: "#fff", fontWeight: 800, fontSize: 32 }}>$29</span>
+                <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>/per month</span>
+              </div>
+              <div style={{ color: "rgba(196,181,253,0.65)", fontSize: 11, marginBottom: 20 }}>For teams and organizations focused on wellbeing.</div>
+              {[
+                "Everything in Premium",
+                "Team wellness dashboard",
+                "Admin analytics panel",
+                "Bulk user management",
+                "SSO & custom integrations",
+                "Dedicated account manager",
+                "SLA guarantee",
+              ].map(f => <div key={f} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10, color: "rgba(255,255,255,0.8)", fontSize: 12 }}><span style={{ color: "#EAB308" }}>✓</span>{f}</div>)}
+              <button style={{ width: "100%", marginTop: 16, background: "linear-gradient(135deg,#D97706,#EAB308)", border: "none", borderRadius: 12, padding: "12px", color: "#1A0A3C", fontSize: 13, fontWeight: 700, cursor: "pointer", boxShadow: "0 4px 16px rgba(234,179,8,0.3)" }}>Contact Sales</button>
+            </div>
+          </div>
         </div>
       </section>
 
