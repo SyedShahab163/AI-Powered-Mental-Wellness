@@ -10,6 +10,11 @@ import Dashboard from "@/pages/Dashboard";
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Signup from "@/pages/Signup";
+import UnburdenDialogue from "@/pages/UnburdenDialogue";
+import DeepWell from "@/pages/DeepWell";
+import PulseMonitor from "@/pages/PulseMonitor";
+import MyFortress from "@/pages/MyFortress";
+import StepBackLight from "@/pages/StepBackLight";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +40,18 @@ function App() {
   if (page === "login") return <Login onLogin={handleLogin} onNavigate={p => setPage(p as Page)} />;
   if (page === "signup") return <Signup onLogin={handleLogin} onNavigate={p => setPage(p as Page)} />;
 
+  const centerPage = () => {
+    if (page === "overview")   return <Dashboard userName={user?.name?.split(" ")[0]} />;
+    if (page === "dialogue")   return <UnburdenDialogue />;
+    if (page === "deep-well")  return <DeepWell />;
+    if (page === "pulse")      return <PulseMonitor />;
+    if (page === "fortress")   return <MyFortress />;
+    if (page === "step-back")  return <StepBackLight />;
+    return null;
+  };
+
+  const showRightPanel = page === "overview";
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -44,17 +61,9 @@ function App() {
             <TopBar />
             <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
               <main style={{ flex: 1, overflow: "hidden", display: "flex" }}>
-                {page === "overview"
-                  ? <Dashboard userName={user?.name?.split(" ")[0]} />
-                  : (
-                    <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 8 }}>
-                      <img src={`${import.meta.env.BASE_URL}candle-real.png`} alt="candle" style={{ width: 50, height: 60, objectFit: "cover", borderRadius: 8, opacity: 0.7 }} />
-                      <p style={{ color: "#9B8FC0", fontSize: 13 }}>Coming soon…</p>
-                    </div>
-                  )
-                }
+                {centerPage()}
               </main>
-              <RightPanel />
+              {showRightPanel && <RightPanel />}
             </div>
             <FooterBar />
           </div>
